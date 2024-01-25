@@ -1,0 +1,139 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* 
+base - 레이어는 리셋 규칙이나 HTML 요소 기본 스타일을 위한 레이어이다.
+components - 레이어는 유틸리티로 재정의할 수 있는 클래스 기반 스타일을 위한 레이어다.
+utilities - 레이어는 다른 스타일보다 우선으로 하는 소규모 단일 목적 클래스를 위한 레이어다.
+ */
+
+/**
+ 폰트 스타일을 정의합니다.
+ */
+@font-face {
+  font-family: 'Tenada';
+  src: url('../public/fonts/Tenada.ttf');
+}
+@font-face {
+  font-family: 'RubikRegular';
+  src: url('../public/fonts/RubikRegular.ttf');
+}
+
+@layer base {
+  html,
+  body,
+  #root {
+    font-size: 14px;
+    font-family: Tenada;
+    background-color: antiquewhite;
+  }
+
+  /** Footer를 최하단에 고정시키기 위한 속성 */
+  #root {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow-x: hidden;
+    background-color: #fbf5f0;
+  }
+
+  /**
+  1.Footer를 최하단에 고정시키기 위한 속성 최대 최소 가로 사이즈를 정의합니다.
+  2.최대 최하 width를 정의합니다.
+  3.width 100%를 적용합니다.
+  */
+  main {
+    flex: 1;
+    margin: 0 auto;
+    max-width: 1200px;
+    min-width: 320px;
+    width: 100%;
+  }
+
+  /** 이미지의 원본 비율을 유지시키기 위해 디폴트 속성을 100%로 지정  */
+  img {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 1/1;
+  }
+
+  /** li 기호 또는 점을 없애기 위한 속성 */
+  li {
+    list-style: none;
+  }
+
+  /** a태그 사용 시 디폴트로 보라색 글씨색 + 밑줄이 생기는데 해당 속성을 제거하기 위해 정의 */
+  a {
+    display: block;
+    color: initial;
+    text-decoration: none;
+  }
+
+  /** 모든버튼은 커서를 포인트를 얻습니다.*/
+  button {
+    cursor: pointer;
+    border-radius: 4px;
+    font-family: Tenada;
+  }
+
+  /** 모든 인풋에 폰트패밀리와 굵기를 정의합니다.*/
+  input,
+  textarea {
+    font-family: RubikRegular;
+    font-weight: 900;
+    border-radius: 4px;
+  }
+
+  /** 모든 테이블 태그에 기본 속성을 적용합니다. */
+  table {
+    display: table;
+    table-layout: fixed;
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+  }
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
+}
+
+/** 
+* 사용자 정의 재사용 클래스
+* @layer 안의 @apply로 CSS 클래스를 묶어서 선언하여 사용할 수 있습니다.
+*/
+
+@layer components {
+  .btn-default {
+    @apply w-full border disabled:cursor-not-allowed disabled:bg-grayscaleD;
+  }
+
+  /** background-image의 position을 center로 하고, 이미지가 반복되지 않고 한번만 노출되게 합니다. */
+  .back-center {
+    @apply bg-center bg-no-repeat;
+  }
+
+  .shadow-drop {
+    box-shadow: 6px 6px 0px -1px;
+  }
+
+  .shadow-calender {
+    box-shadow: 0 0 10px 0 rgb(0, 0, 0, 0.2);
+  }
+
+  .ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .font-R {
+    font-family: 'RubikRegular';
+    font-weight: bold;
+  }
+
+  .td-border-b {
+    border-bottom: 1px solid #bebebe;
+  }
+}
